@@ -1,0 +1,40 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <title>Задание по верстке</title>
+	<meta charset="utf-8">
+  <link rel="stylesheet" type="text/css" href="sample.css">
+</head>
+<body class = "b-page">
+<script src="sample.js"></script>
+<div class="b-page__content">	
+  <h1 class="b-header">Если бы на прошлой неделе вы инвестировали в ПАММ-счет успешного управляющего</h1>    
+  <div class="b-mainbox">
+    <div class="b-mainbox__first-column">
+      <div class="b-menu__header"><span class="b-menu__header__number">№ счета</span>Управляющий</div>
+      <ul class="b-menu">
+        <li class="b-item b-item_selected"><span class="b-item__account"><span class="b-item__account__number b-item_selected__account__no-dashed">11970</span></span><span class="b-item__account__name">Galax</span></li></br>
+        <li class="b-item"><span class="b-item__account"><span class="b-item__account__number">7348</span></span><span class="b-item__account__name">Veronica</span></li></br>
+        <li class="b-item"><span class="b-item__account"><span class="b-item__account__number">10555</span></span><span class="b-item__account__name">Dragonfly</span></li></br>
+        <li class="b-item"><span class="b-item__account"><span class="b-item__account__number">10504</span></span><span class="b-item__account__name">Condor</span></li></br>
+        <li class="b-item"><span class="b-item__account"><span class="b-item__account__number">10469</span></span><span class="b-item__account__name">Shark_007</span></li></br>                                       
+      </ul>     
+    </div>       
+    <img src="arrow.png" class="b-mainbox__separator">                   
+    <div class = "b-mainbox__second-column">      
+      <div class="b-slider__output">        
+        <div class="b-slider__output__text1"></div>
+      </div>      
+      <input type="range" class="b-slider" min="0" max="4000" value="1000" step="1">                        
+      <!--<div style="display: block;">-->      
+      <div class="b-slider__outputs-name">Сегодня ваш депозит бы составил</div>        
+      <div class="b-slider__outputs-text" id="output2"></div>              
+      <div class="b-slider__clearfloat"></div>
+      <div class="b-slider__outputs-name">За год при повторении вклада, заработали бы</div>        
+      <div class="b-slider__outputs-text" id="output3"></div>            
+    </div>            
+    <div class="b-slider__clearfloat"></div>
+  </div>
+</div>	
+</body>
+</html>
