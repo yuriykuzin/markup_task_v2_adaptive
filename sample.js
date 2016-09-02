@@ -22,23 +22,16 @@ window.onload = function () {
 }
 
 function resizeArrow() {  
-  var mainboxHeight = Math.max(getStyle(document.getElementsByClassName("b-mainbox__first-column")[0],"height"), 
-    getStyle(document.getElementsByClassName("b-mainbox__second-column")[0],"height") + 
-    getStyle(document.getElementsByClassName("b-mainbox__second-column")[0],"padding-bottom"));
-  var separatorWidth = getStyle(document.querySelector(".b-mainbox__separator"), "width");
-  if (separatorWidth > 0) {
-    trackWidth = getStyle(document.querySelector(".b-mainbox"), "width") - 
-      getStyle(document.querySelector(".b-mainbox__first-column"), "width") - 
-      separatorWidth-80;
-      document.querySelector(".b-mainbox__second-column").style.paddingTop = (mainboxHeight - getStyle(document.querySelector(".b-mainbox__second-column"), "height"))/2+5 + "px";  
-  } else {
-    trackWidth = getStyle(document.querySelector(".b-mainbox"), "width") - 85;
-    document.querySelector(".b-mainbox__second-column").style.paddingTop = "3%";  
-  }    
-  slider.style.width = trackWidth + "px";
-  
-  document.getElementsByClassName("b-mainbox__separator")[0].style.height = mainboxHeight+10 + "px";      
-  handleSlider();
+    document.querySelector(".b-mainbox").style.backgroundPosition = getStyle(document.querySelector(".b-mainbox__first-column"), "width") + "px";    
+    var separatorWidth = getStyle(document.querySelector(".b-mainbox__separator"), "width");
+    if (separatorWidth > 0) {
+      trackWidth = getStyle(document.querySelector(".b-mainbox"), "width") - 
+        getStyle(document.querySelector(".b-mainbox__first-column"), "width") - separatorWidth-85;            
+    } else {
+      trackWidth = getStyle(document.querySelector(".b-mainbox"), "width") - 85;      
+    }        
+    slider.style.width = trackWidth + "px";       
+    handleSlider();    
 }
 
 function initSliders() {      
