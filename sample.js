@@ -1,7 +1,5 @@
 "use strict"
 
-var trackWidth, activeMultiplier;
-
 var multipliers = {
   "11970": [1.265, 27.432],
   "7348": [1.12, 26.3],
@@ -10,70 +8,85 @@ var multipliers = {
   "10469": [0.75, 18.5]
 };
 
-var slider = document.querySelector("input[type=range]");
-var mySliderStyle, sliderMaxValue;
+var slider,
+    mySliderStyle, 
+    sliderMaxValue,
+    trackWidth, 
+    activeMultiplier;
+
 
 window.onload = function () {  
   countActiveMultiplier();
-  initSliders();
+  initSlider();
   initMenu();
-  window.addEventListener("resize", resizeArrow);      
-  resizeArrow();
+  window.addEventListener("resize", resizeArrowAndSliderWidth);
+  resizeArrowAndSliderWidth();
 }
 
-function resizeArrow() {  
-    document.querySelector(".b-mainbox").style.backgroundPosition = getStyle(document.querySelector(".b-mainbox__first-column"), "width") + "px";    
+
+function resizeArrowAndSliderWidth() {  
+    document.querySelector(".b-mainbox").style.backgroundPosition = 
+      getStyle(document.querySelector(".b-mainbox__first-column"), "width") + "px";    
+
     var separatorWidth = getStyle(document.querySelector(".b-mainbox__separator"), "width");
+
     if (separatorWidth > 0) {
       trackWidth = getStyle(document.querySelector(".b-mainbox"), "width") - 
-        getStyle(document.querySelector(".b-mainbox__first-column"), "width") - separatorWidth-85;            
+        getStyle(document.querySelector(".b-mainbox__first-column"), "width") - separatorWidth - 80;
     } else {
-      trackWidth = getStyle(document.querySelector(".b-mainbox"), "width") - 85;      
+      trackWidth = getStyle(document.querySelector(".b-mainbox"), "width") - 80;      
     }        
+
     slider.style.width = trackWidth + "px";       
     handleSlider();    
 }
 
-function initSliders() {      
-  slider = document.querySelector('input[type=range]');    
+
+function initSlider() {      
+  slider = document.querySelector(".b-slider");      
   sliderMaxValue = slider.getAttribute("max");
-  var st = document.createElement('style');
-  st.id = 's_myslider';
+  var st = document.createElement("style");
+  st.id = "s_myslider";
   document.head.appendChild(st);
-  mySliderStyle = document.getElementById('s_myslider');
+  mySliderStyle = document.querySelector("#s_myslider");
 
-  slider.addEventListener('input',function () {handleSlider()},false);
-  slider.addEventListener('change',function () {handleSlider()},false);  
+  slider.addEventListener("input", function () {handleSlider()});
+  slider.addEventListener("change", function () {handleSlider()});  
 
-  slider.output1 = slider.parentNode.querySelector('.b-slider__output__text1');        
-  slider.output2 = slider.parentNode.querySelector('#output2'); 
-  slider.output3 = slider.parentNode.querySelector('#output3'); 
-  handleSlider();
+  slider.output1 = slider.parentNode.querySelector(".b-slider__output__text1");
+  slider.output2 = slider.parentNode.querySelector("#output2");
+  slider.output3 = slider.parentNode.querySelector("#output3");   
 }  
 
+
 function handleSlider() {                   
-    var koeff = 0.927 + 0.00018*(trackWidth-205);        
-    var styleString = '.b-slider::-webkit-slider-runnable-track {background-size: ' + 
-      (Math.round(slider.value*trackWidth/slider.getAttribute('max')) +
-      ((slider.value*1 > (slider.getAttribute('max')/2))?0:7)) + "px 100%, 100% 100%;} ";          
+    var koeff = 0.927 + 0.00018*(trackWidth-205);
+
+    var styleString = ".b-slider::-webkit-slider-runnable-track {background-size: " + 
+      (Math.round(slider.value * trackWidth / sliderMaxValue) +
+      ((slider.value > (sliderMaxValue / 2)) ? 0 : 7)) + "px 100%, 100% 100%;} ";
+
     mySliderStyle.textContent = styleString;           
-    slider.output1.innerHTML = slider.value.replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1 ') + " $";
+
+    slider.output1.innerHTML = slider.value.replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, "$1 ") + " $";
     
-    slider.output2.innerHTML = (Math.round(parseInt(slider.value, 10)*activeMultiplier[0]) +
-      "").replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1 ') + " $";
+    slider.output2.innerHTML = (Math.round(parseInt(slider.value, 10) * activeMultiplier[0]) +
+      "").replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, "$1 ") + " $";
       
-    slider.output3.innerHTML = (Math.round(parseInt(slider.value, 10)*activeMultiplier[1]) +
-      "").replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1 ') + " $";    
+    slider.output3.innerHTML = (Math.round(parseInt(slider.value, 10) * activeMultiplier[1]) +
+      "").replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, "$1 ") + " $";    
       
-    slider.parentNode.querySelector('.b-slider__output').style.marginLeft = 
-      (slider.value*trackWidth/sliderMaxValue*koeff) + (getStyle(slider, "margin-left")) - (29) + "px";        
+    slider.parentNode.querySelector(".b-slider__output").style.marginLeft = 
+      (slider.value * trackWidth / sliderMaxValue * koeff) + (getStyle(slider, "margin-left")) - (29) + "px";        
 }
 
+
 function initMenu() {  
-  var allItems = document.getElementsByClassName("b-item");
+  var allItems = document.querySelectorAll(".b-item");
   for (var i = 0; i < allItems.length; i++) {
-      allItems[i].addEventListener('click', function () {menuClick(this)}, false);
+      allItems[i].addEventListener("click", function () {menuClick(this);});
   }  
+
   function menuClick(currentItem) {
     var oldItem = currentItem.parentNode.querySelector(".b-item_selected");      
     oldItem.classList.remove("b-item_selected");
@@ -85,18 +98,20 @@ function initMenu() {
   }
 }
 
+
 function countActiveMultiplier() {
   activeMultiplier = multipliers[document.querySelector(".b-item_selected__account__no-dashed").innerHTML]; 
-    if (activeMultiplier === undefined) {
-      alert("Please update multipliers database (object multipliers in sample.js)");
-      activeMultiplier = new Array(1 ,1);
-    }
+  if (activeMultiplier === undefined) {
+    alert("Please update multipliers database (object multipliers in sample.js)");
+    activeMultiplier = [1 ,1];
+  }
 }
+
 
 /***
  * get live runtime value of an element's css style
  *   http://robertnyman.com/2006/04/24/get-the-rendered-style-of-an-element
- *     note: "styleName" is in CSS form (i.e. 'font-size', not 'fontSize').
+ *     note: "styleName" is in CSS form (i.e. "font-size", not "fontSize").
  ***/
 var getStyle = function (e, styleName) {
     var styleValue = "";

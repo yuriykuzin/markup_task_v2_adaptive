@@ -16,7 +16,7 @@
   margin: 0px 0px 0px 0px;  
   overflow-y: auto;
   overflow-x: hidden;
-  padding: 0;  
+  padding: 0;    
 }
 
 .b-page__content {  
@@ -145,20 +145,9 @@
 }
 
 .b-mainbox__second-column {    
-  padding: 3% 2vw 2vh 0;    
+  padding: 3% 2% 2% 0;    
   overflow: hidden;      
-  -height: 1%; 
-  *zoom: 1; 
-  display: table;
 }
-
-.b-mainbox__second-column:after {
-  content: '1 1 1 1 1 1 1 1 1 1 1'; 
-   font: .1px/0 a;
-   display: block;
-   word-spacing: 99in;
-   overflow: hidden; 
-} 
 
 .b-slider__output {
   background-image: url('slideroutput.png');
@@ -225,6 +214,8 @@
   animate: 0.2s;  
   border-radius: 5px;  
   background-image: url('slidertrackafter.png');  
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
 }
 
 .b-slider::-moz-range-thumb {
@@ -247,6 +238,7 @@
   border: none;
   color: transparent;
   background-image: url('slidertrackafter.png');  
+  background-repeat: no-repeat;
 }
 
 .b-slider::-ms-fill-lower {
@@ -279,11 +271,11 @@
 
 .b-slider__outputs-name {
   float: left;
-  width: 30%;    
+  max-width: 150px;
+  min-width: 100px;  
   color: rgb(96, 195, 245);  
   font-style: italic;
-  font-size: 0.9em;  
-  min-width: 150px;
+  font-size: 0.9em;    
   padding: 0px 0px 0px 0px;
   padding-top: 3%;
   vertical-align: center;  
@@ -302,15 +294,14 @@
   clear:both;
 }
 
-@media (min-width: 510px) and (max-width: 630px) {
+@media (min-width: 510px) and (max-width: 620px) {
   .b-slider__outputs-text {    
     width: 100%;    
     text-align: right;
   }       
 }
 
-@media(max-width: 510px) {
-  
+@media(max-width: 510px) {  
   .b-page {    
     width: 100%;        
   }
@@ -333,16 +324,12 @@
     margin-left: 10px;
     margin-bottom: 10px;
     padding-top: 5%
-  }      
+  }          
 }
 
-@media(max-width: 370px) {      
-  .b-slider__outputs-name {
-    width: 50%;
-  }
-  
+@media(max-width: 355px) {          
   .b-slider__outputs-text {    
     width: 100%;    
     text-align: right;
-  }       
+  }         
 }
