@@ -327,7 +327,7 @@
   }          
 }
 
-@media(max-width: 355px) {          
+@media(max-width: 370px) {          
   .b-slider__outputs-text {    
     width: 100%;    
     text-align: right;
