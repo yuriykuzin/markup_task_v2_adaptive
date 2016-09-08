@@ -9,12 +9,14 @@ var multipliers = {
 };
 
 var slider,
-    mySliderStyle, 
+    sliderStyle, 
     sliderMaxValue,
-    trackWidth, 
-    activeMultiplier;
+    sliderMarginLeft,
+    sliderTrackWidth, 
+    activeMultiplier,
+    koeff;
 
-
+    
 window.onload = function () {  
   countActiveMultiplier();
   initSlider();
@@ -31,13 +33,15 @@ function resizeArrowAndSliderWidth() {
     var separatorWidth = getStyle(document.querySelector(".b-mainbox__separator"), "width");
 
     if (separatorWidth > 0) {
-      trackWidth = getStyle(document.querySelector(".b-mainbox"), "width") - 
+      sliderTrackWidth = getStyle(document.querySelector(".b-mainbox"), "width") - 
         getStyle(document.querySelector(".b-mainbox__first-column"), "width") - separatorWidth - 80;
     } else {
-      trackWidth = getStyle(document.querySelector(".b-mainbox"), "width") - 80;      
+      sliderTrackWidth = getStyle(document.querySelector(".b-mainbox"), "width") - 80;      
     }        
 
-    slider.style.width = trackWidth + "px";       
+    slider.style.width = sliderTrackWidth + "px";       
+    koeff = 0.927 + 0.00018*(sliderTrackWidth-205);
+    sliderMarginLeft = getStyle(slider, "margin-left");
     handleSlider();    
 }
 
@@ -48,7 +52,7 @@ function initSlider() {
   var st = document.createElement("style");
   st.id = "s_myslider";
   document.head.appendChild(st);
-  mySliderStyle = document.querySelector("#s_myslider");
+  sliderStyle = document.querySelector("#s_myslider");
 
   slider.addEventListener("input", function () {handleSlider()});
   slider.addEventListener("change", function () {handleSlider()});  
@@ -59,14 +63,12 @@ function initSlider() {
 }  
 
 
-function handleSlider() {                   
-    var koeff = 0.927 + 0.00018*(trackWidth-205);
-
+function handleSlider() {                       
     var styleString = ".b-slider::-webkit-slider-runnable-track {background-size: " + 
-      (Math.round(slider.value * trackWidth / sliderMaxValue) +
+      (Math.round(slider.value * sliderTrackWidth / sliderMaxValue) +
       ((slider.value > (sliderMaxValue / 2)) ? 0 : 7)) + "px 100%, 100% 100%;} ";
 
-    mySliderStyle.textContent = styleString;           
+    sliderStyle.textContent = styleString;           
 
     slider.output1.innerHTML = slider.value.replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, "$1 ") + " $";
     
@@ -77,7 +79,7 @@ function handleSlider() {
       "").replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, "$1 ") + " $";    
       
     slider.parentNode.querySelector(".b-slider__output").style.marginLeft = 
-      (slider.value * trackWidth / sliderMaxValue * koeff) + (getStyle(slider, "margin-left")) - (29) + "px";        
+      (slider.value * sliderTrackWidth / sliderMaxValue * koeff) + sliderMarginLeft - (29) + "px";        
 }
 
 
