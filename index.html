@@ -4,10 +4,10 @@
   <title>Задание по верстке</title>
 	<meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" href="custom_div_slider.css">
   <link rel="stylesheet" type="text/css" href="sample.css">  
 </head>
 <body class = "b-page">
-<script src="sample.js"></script>
 <div class="b-page__content">	
   <h1 class="b-header">Если бы на прошлой неделе вы инвестировали в ПАММ-счет успешного управляющего</h1>    
   <div class="b-mainbox">
@@ -23,17 +23,16 @@
     </div>       
     <div class="b-mainbox__separator">&nbsp;</div>
     <div class = "b-mainbox__second-column">      
-      <div class="b-slider__output">        
-        <div class="b-slider__output__text1"></div>
-      </div>      
-      <input type="range" class="b-slider" min="0" max="4000" value="1000" step="1">                                   
+      <div class="b-slider custom-div-slider" id="myslider" data-value="1000" data-max="4000" tabindex="1"></div>
       <div class="b-slider__outputs-name">Сегодня ваш депозит бы составил</div>        
-      <div class="b-slider__outputs-text" id="output2"></div>              
+      <div class="b-slider__outputs-text" id="output1"></div>              
       <div class="b-slider__clearfloat"></div>
       <div class="b-slider__outputs-name">За год при повторении вклада, заработали бы</div>        
-      <div class="b-slider__outputs-text" id="output3"></div>            
+      <div class="b-slider__outputs-text" id="output2"></div>            
     </div>                
   </div>  
 </div>	
+<script src="custom_div_slider.js"></script>
+<script src="sample.js"></script>
 </body>
 </html>
