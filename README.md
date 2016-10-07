@@ -12,3 +12,6 @@ https://github.com/yuriykuzin/markup_task_v2_adaptive/tree/new
 
 Original task:
 https://www.artlebedev.ru/job/web-tech-ua-8
+
+My Angular 2 version:
+http://plnkr.co/edit/A5y76O
